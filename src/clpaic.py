@@ -94,7 +94,7 @@ def main():
     ]
 
     while True:
-        user_input = input("Input: ")
+        user_input = input(">>> ")
 
         if user_input.lower() in ["exit", "quit"]:
             print("Exiting.")
@@ -102,8 +102,6 @@ def main():
 
         if not user_input.strip():
             continue
-
-        print("\nProcessing...")
 
         try:
             result = suggest_command(user_input, messages)

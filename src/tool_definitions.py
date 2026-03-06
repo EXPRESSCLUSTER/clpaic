@@ -116,21 +116,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_server_config",
-                "description": "Show the configuration of the specified server",
+                "description": "Show the configuration of the specified server. If no server name is specified, all servers are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "server_name": {
                             "type": "string",
-                            "description": "Name of the server to show configuration for"
+                            "description": "Name of the server to show configuration for. If omitted, all servers are shown"
                         }
                     },
-                    "required": ["server_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --sv {args['server_name']}",
-        "description": lambda args: f"Show server configuration: {args['server_name']}",
+        "command": lambda args: f"clpstat --sv {args['server_name']}" if args.get("server_name") else "clpstat --sv",
+        "description": lambda args: f"Show server configuration: {args['server_name']}" if args.get("server_name") else "Show all servers configuration",
     },
 
     ## clpstat --hb
@@ -139,21 +139,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_heartbeat_config",
-                "description": "Show the configuration of the specified heartbeat resource",
+                "description": "Show the configuration of the specified heartbeat resource. If no resource name is specified, all heartbeat resources are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "resource_name": {
                             "type": "string",
-                            "description": "Name of the heartbeat resource to show configuration for"
+                            "description": "Name of the heartbeat resource to show configuration for. If omitted, all heartbeat resources are shown"
                         }
                     },
-                    "required": ["resource_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --hb {args['resource_name']}",
-        "description": lambda args: f"Show heartbeat resource configuration: {args['resource_name']}",
+        "command": lambda args: f"clpstat --hb {args['resource_name']}" if args.get("resource_name") else "clpstat --hb",
+        "description": lambda args: f"Show heartbeat resource configuration: {args['resource_name']}" if args.get("resource_name") else "Show all heartbeat resources configuration",
     },
 
     ## clpstat --fnc
@@ -162,21 +162,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_fencing_config",
-                "description": "Show the configuration of the specified fencing function (network partition resolution resource and forced stop resource)",
+                "description": "Show the configuration of the specified fencing function (network partition resolution resource and forced stop resource). If no resource name is specified, all fencing functions are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "resource_name": {
                             "type": "string",
-                            "description": "Name of the fencing function resource to show configuration for"
+                            "description": "Name of the fencing function resource to show configuration for. If omitted, all fencing functions are shown"
                         }
                     },
-                "required": ["resource_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --fnc {args['resource_name']}",
-        "description": lambda args: f"Show fencing function configuration: {args['resource_name']}",
+        "command": lambda args: f"clpstat --fnc {args['resource_name']}" if args.get("resource_name") else "clpstat --fnc",
+        "description": lambda args: f"Show fencing function configuration: {args['resource_name']}" if args.get("resource_name") else "Show all fencing functions configuration",
     },
 
     ## clpstat --svg
@@ -185,21 +185,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_servergroup_config",
-                "description": "Show the configuration of the specified server group",
+                "description": "Show the configuration of the specified server group. If no server group name is specified, all server groups are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "servergroup_name": {
                             "type": "string",
-                            "description": "Name of the server group to show configuration for"
+                            "description": "Name of the server group to show configuration for. If omitted, all server groups are shown"
                         }
                     },
-                    "required": ["servergroup_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --svg {args['servergroup_name']}",
-        "description": lambda args: f"Show server group configuration: {args['servergroup_name']}",
+        "command": lambda args: f"clpstat --svg {args['servergroup_name']}" if args.get("servergroup_name") else "clpstat --svg",
+        "description": lambda args: f"Show server group configuration: {args['servergroup_name']}" if args.get("servergroup_name") else "Show all server groups configuration",
     },
 
     ## clpstat --grp
@@ -208,21 +208,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_group_config",
-                "description": "Show the configuration of the specified group",
+                "description": "Show the configuration of the specified group. If no group name is specified, all groups are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "group_name": {
                             "type": "string",
-                            "description": "Name of the group to show configuration for"
+                            "description": "Name of the group to show configuration for. If omitted, all groups are shown"
                         }
                     },
-                    "required": ["group_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --grp {args['group_name']}",
-        "description": lambda args: f"Show group configuration: {args['group_name']}",
+        "command": lambda args: f"clpstat --grp {args['group_name']}" if args.get("group_name") else "clpstat --grp",
+        "description": lambda args: f"Show group configuration: {args['group_name']}" if args.get("group_name") else "Show all groups configuration",
     },
 
     ## clpstat --rsc
@@ -231,21 +231,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_resource_config",
-                "description": "Show the configuration of the specified group resource",
+                "description": "Show the configuration of the specified group resource. If no resource name is specified, all group resources are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "resource_name": {
                             "type": "string",
-                            "description": "Name of the group resource to show configuration for"
+                            "description": "Name of the group resource to show configuration for. If omitted, all group resources are shown"
                         }
                     },
-                    "required": ["resource_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --rsc {args['resource_name']}",
-        "description": lambda args: f"Show group resource configuration: {args['resource_name']}",
+        "command": lambda args: f"clpstat --rsc {args['resource_name']}" if args.get("resource_name") else "clpstat --rsc",
+        "description": lambda args: f"Show group resource configuration: {args['resource_name']}" if args.get("resource_name") else "Show all group resources configuration",
     },
 
     ## clpstat --mon
@@ -254,21 +254,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_monitor_config",
-                "description": "Show the configuration of the specified monitor resource",
+                "description": "Show the configuration of the specified monitor resource. If no monitor name is specified, all monitor resources are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "monitor_name": {
                             "type": "string",
-                            "description": "Name of the monitor resource to show configuration for"
+                            "description": "Name of the monitor resource to show configuration for. If omitted, all monitor resources are shown"
                         }
                     },
-                    "required": ["monitor_name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --mon {args['monitor_name']}",
-        "description": lambda args: f"Show monitor resource configuration: {args['monitor_name']}",
+        "command": lambda args: f"clpstat --mon {args['monitor_name']}" if args.get("monitor_name") else "clpstat --mon",
+        "description": lambda args: f"Show monitor resource configuration: {args['monitor_name']}" if args.get("monitor_name") else "Show all monitor resources configuration",
     },
 
     ## clpstat --xcl
@@ -277,21 +277,21 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "show_exclusive_rule_config",
-                "description": "Show the configuration of the specified exclusive rule",
+                "description": "Show the configuration of the specified exclusive rule. If no name is specified, all exclusive rules are shown",
                 "parameters": {
                     "type": "object",
                     "properties": {
                         "name": {
                             "type": "string",
-                            "description": "Name of the exclusive rule to show configuration for"
+                            "description": "Name of the exclusive rule to show configuration for. If omitted, all exclusive rules are shown"
                         }
                     },
-                    "required": ["name"]
+                    "required": []
                 }
             }
         },
-        "command": lambda args: f"clpstat --xcl {args['name']}",
-        "description": lambda args: f"Show exclusive rule configuration: {args['name']}",
+        "command": lambda args: f"clpstat --xcl {args['name']}" if args.get("name") else "clpstat --xcl",
+        "description": lambda args: f"Show exclusive rule configuration: {args['name']}" if args.get("name") else "Show all exclusive rules configuration",
     },
 
     ## clpstat -i
