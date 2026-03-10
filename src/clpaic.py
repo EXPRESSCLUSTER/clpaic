@@ -10,11 +10,14 @@ import config
 from tool_definitions import TOOLS_DEFINITIONS, TOOLS
 
 
-def execute_tool(tool_name, arguments):
+def generate_command(tool_name, arguments):
     cmd = TOOLS_DEFINITIONS[tool_name]["command"](arguments)
     if hostname := arguments.get("hostname"):
         cmd += f" -h {hostname}"
+    return cmd
 
+
+def execute_command(cmd):
     if not config.DRYRUN:
         print(f"Running {cmd} ...")
         try:
@@ -37,7 +40,6 @@ def execute_tool(tool_name, arguments):
             print(f"[ERROR] Unexpected error: {e}")
     else:
         print(cmd)
-    return cmd
 
 def get_action_description(tool_name, arguments):
     description = TOOLS_DEFINITIONS[tool_name]["description"](arguments)
@@ -80,7 +82,7 @@ def suggest_command(user_input, messages):
             function_args = json.loads(tool_call.function.arguments)
 
             # Generate command line
-            command = execute_tool(function_name, function_args)
+            command = generate_command(function_name, function_args)
             action = get_action_description(function_name, function_args)
 
             messages.append({
@@ -135,6 +137,7 @@ def main():
                     print(f"{i}. {suggestion['action']}")
                     print(f"   Command: {suggestion['command']}")
                 print()
+                execute_command(result[0]["command"])
             elif result:
                 print(f"\n{result}\n")
             else:
