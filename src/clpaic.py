@@ -1,10 +1,13 @@
 import httpx
 import json
 import os
+import subprocess
+import shlex
+
 from openai import OpenAI
 
+import config
 from tool_definitions import TOOLS_DEFINITIONS, TOOLS
-from openai_config import BASE_URL, KEY, MODEL
 
 
 def execute_tool(tool_name, arguments):
@@ -12,10 +15,26 @@ def execute_tool(tool_name, arguments):
     if hostname := arguments.get("hostname"):
         cmd += f" -h {hostname}"
 
-    flag = False   # Set to True to actually execute the command
-    if flag:
+    if not config.DRYRUN:
         print(f"Running {cmd} ...")
-        os.system(cmd)
+        try:
+            cmd_list = shlex.split(cmd)
+            result = subprocess.run(
+                cmd_list,
+                capture_output=True,
+                text=True,
+                timeout=60
+            )
+            if result.stdout:
+                print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+        except FileNotFoundError as e:
+            print(f"[ERROR] Command not found: {e}")
+        except subprocess.TimeoutExpired as e:
+            print(f"[ERROR] Command timed out: {e}")
+        except Exception as e:
+            print(f"[ERROR] Unexpected error: {e}")
     else:
         print(cmd)
     return cmd
@@ -32,15 +51,15 @@ def suggest_command(user_input, messages):
         "content": user_input
     })
 
-    http_client = httpx.Client(verify=True)
+    http_client = httpx.Client(verify=config.SSL_VERIFY)
 
     client = OpenAI(
-        api_key = KEY,
+        api_key = config.OPENAI_API_KEY,
         http_client=http_client
     )
-    client.base_url = BASE_URL
+    client.base_url = config.OPENAI_BASE_URL
     response = client.chat.completions.create(
-        model=MODEL,
+        model=config.OPENAI_MODEL,
         messages=messages,
         tools=TOOLS,
         tool_choice="auto"
@@ -94,7 +113,11 @@ def main():
     ]
 
     while True:
-        user_input = input(">>> ")
+        try:
+            user_input = input(">>> ")
+        except EOFError:
+            print("\nExiting.")
+            break
 
         if user_input.lower() in ["exit", "quit"]:
             print("Exiting.")
