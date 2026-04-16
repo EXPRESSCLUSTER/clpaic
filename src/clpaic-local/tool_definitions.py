@@ -365,7 +365,7 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "restart_cluster",
-                "description": "Restart the CLUSTERPRO daemon. Can be applied to this server only or all servers",
+                "description": "Restart the EXPRESSCLUSTER daemon. Can be applied to this server only or all servers",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -424,7 +424,7 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "shutdown_server",
-                "description": "Stop the CLUSTERPRO daemon and shut down or restart the server",
+                "description": "Stop the EXPRESSCLUSTER daemon and shut down or restart the server",
                 "parameters": {
                     "type": "object",
                     "properties": {

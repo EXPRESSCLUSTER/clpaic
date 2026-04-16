@@ -141,15 +141,15 @@ def suggest_and_execute(user_input, messages):
 
 
 def main():
-    print("=== CLUSTERPRO REST API Chat Tool ===")
+    print("=== EXPRESSCLUSTER REST API Chat Tool ===")
     print("Enter cluster operations in natural language (type 'exit' to quit)\n")
 
     messages = [
         {
             "role": "system",
             "content": (
-                "You are an assistant for CLUSTERPRO X system administrators. "
-                "Use the available tools to interact with the CLUSTERPRO REST API based on the user's request. "
+                "You are an assistant for EXPRESSCLUSTER X system administrators. "
+                "Use the available tools to interact with the EXPRESSCLUSTER REST API based on the user's request. "
                 "For POST (operation) APIs, note that they are asynchronous — the response only indicates "
                 "that the request was accepted, not that the operation completed. "
                 "Suggest using the corresponding status-check tool to verify completion when appropriate. "

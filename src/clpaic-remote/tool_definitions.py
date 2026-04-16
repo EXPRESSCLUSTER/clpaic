@@ -400,7 +400,7 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "start_server_service",
-                "description": "Start the CLUSTERPRO service on the specified server.",
+                "description": "Start the EXPRESSCLUSTER service on the specified server.",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -424,7 +424,7 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "stop_server_service",
-                "description": "Stop the CLUSTERPRO service on the specified server.",
+                "description": "Stop the EXPRESSCLUSTER service on the specified server.",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -792,7 +792,7 @@ TOOLS_DEFINITIONS = {
             "type": "function",
             "function": {
                 "name": "run_script",
-                "description": "Execute a script on a CLUSTERPRO server. The script must be placed in the work/rexec/ directory under the CLUSTERPRO installation directory on the target server.",
+                "description": "Execute a script on a EXPRESSCLUSTER server. The script must be placed in the work/rexec/ directory under the EXPRESSCLUSTER installation directory on the target server.",
                 "parameters": {
                     "type": "object",
                     "properties": {
@@ -802,7 +802,7 @@ TOOLS_DEFINITIONS = {
                         },
                         "target": {
                             "type": "string",
-                            "description": "IP address of the CLUSTERPRO server to execute the script on."
+                            "description": "IP address of the EXPRESSCLUSTER server to execute the script on."
                         },
                         "timeout": {
                             "type": "integer",
