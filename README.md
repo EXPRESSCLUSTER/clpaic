@@ -109,3 +109,10 @@ Running clpstat -g ...
     server1 [o] : failover2[o] 
  =====================================================================
 ```
+
+## Versions
+
+There are two versions of clpaic available:
+
+- **clpaic-local**: Operates the cluster using EXPRESSCLUSTER commands installed on the local environment.
+- **clpaic-remote**: Operates the cluster using the EXPRESSCLUSTER REST API, allowing remote management without direct access to the cluster nodes.
